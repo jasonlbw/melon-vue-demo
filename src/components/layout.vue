@@ -23,16 +23,22 @@
       <div class="app-foot">
          <p>© 2016 fishenal MIT</p>
       </div>
+      <my-dialog>
+         
+      </my-dialog>
    </div>
 </template>
 
 <script>
-
-export default {
+import dialog from './dialog'
+export default {   
    data () {
       return {
          name: 'layout'
       }
+   },
+   components: {
+      myDialog: dialog
    }
 }
 </script>
