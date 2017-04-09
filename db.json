@@ -21,6 +21,28 @@
       "url": "http://hearstone.com"
     }
   ],
+  "getSlidesList": [
+    {
+      "src": "../assets/slideShow/pic1.jpg",
+      "title": "xxx1",
+      "href": "detail/analysis"
+    },
+    {
+      "src": "../assets/slideShow/pic2.jpg",
+      "title": "xxx2",
+      "href": "detail/count"
+    },
+    {
+      "src": "../assets/slideShow/pic3.jpg",
+      "title": "xxx3",
+      "href": "http://xxx.xxx.com"
+    },
+    {
+      "src": "../assets/slideShow/pic4.jpg",
+      "title": "xxx4",
+      "href": "detail/forecast"
+    }
+  ],
   "login": {
     "username": "yudongdong",
     "userId": 123123

@@ -95,7 +95,7 @@ var server = app.listen(port)
 
 const apiServer = express()
 const bodyParser = require('body-parser')
-apiServer.use(bodyParser.urlencoded({ extened: true }))
+apiServer.use(bodyParser.urlencoded({ extended: true }))
 apiServer.use(bodyParser.json())
 const apiRouter = express.Router()
 const fs = require('fs')

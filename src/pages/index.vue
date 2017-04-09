@@ -24,6 +24,7 @@
          </div>
       </div>
       <div class="index-right">
+      	<slide-show :slides="slides" :inv="slideSpeed"></slide-show>
       	<div class="index-board-list">
       		<div 
       			class="index-board-item" 
@@ -42,7 +43,11 @@
     </div>
 </template>
 <script>
+	import slideShow from '../components/slideShow'
    export default {
+   	components: {
+   		slideShow
+   	},
    	created () {
    		this.$http.get('/api/getNewsList')
    		.then((res) => {
@@ -53,6 +58,29 @@
    	},
 		data () {
 			return {
+				slideSpeed: 2000,
+				slides: [
+		        {
+		          src: require('../assets/slideShow/pic1.jpg'),
+		          title: 'xxx1',
+		          href: 'detail/analysis'
+		        },
+		        {
+		          src: require('../assets/slideShow/pic2.jpg'),
+		          title: 'xxx2',
+		          href: 'detail/count'
+		        },
+		        {
+		          src: require('../assets/slideShow/pic3.jpg'),
+		          title: 'xxx3',
+		          href: 'http://xxx.xxx.com'
+		        },
+		        {
+		          src: require('../assets/slideShow/pic4.jpg'),
+		          title: 'xxx4',
+		          href: 'detail/forecast'
+		        }
+		      ],
 				boardList: [
 		         {
 		         	title: '开放产品',
@@ -135,7 +163,7 @@
 		}
 	}
 </script>
-<style scoped="">
+<style scoped>
     .index-wrap {
   width: 1200px;
   margin: 0 auto;
