@@ -81,6 +81,47 @@ devMiddleware.waitUntilValid(() => {
 
 var server = app.listen(port)
 
+/*json-server方式，缺点：仅支持get方式*/
+// const jsonServer = require('json-server')
+// const apiServer = jsonServer.create()
+// const apiRouter = jsonServer.router('db.json')
+// const middlewares = jsonServer.defaults()
+
+// apiServer.use(middlewares)
+// apiServer.use('/api', apiRouter)
+// apiServer.listen(port + 1, () => {
+//   console.log('JSON Server is running')
+// })
+
+const apiServer = express()
+const bodyParser = require('body-parser')
+apiServer.use(bodyParser.urlencoded({ extened: true }))
+apiServer.use(bodyParser.json())
+const apiRouter = express.Router()
+const fs = require('fs')
+apiRouter.route('/:apiName')
+.all(function(req, res) {
+  fs.readFile('./db.json', 'utf8', function(err, data) {
+    if(err) throw err
+    var data = JSON.parse(data)
+    if(data[req.params.apiName]) {
+      res.json(data[req.params.apiName])
+    } else {
+      res.send('no such api name')
+    }
+  })
+})
+
+apiServer.use('/api', apiRouter)
+apiServer.listen(port + 1, function(err) {
+  if(err) {
+    console.log(err)
+    return
+  }
+  console.log('Listening at http://localhost:' + (port + 1) + '\n')
+})
+
+
 module.exports = {
   ready: readyPromise,
   close: () => {
