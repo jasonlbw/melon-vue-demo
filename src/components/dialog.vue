@@ -1,13 +1,13 @@
 <template>
 	<div>
-		<div class="dialog-wrap">
-			<div class="dialog-cover"></div>
-      <transition name="drop">
-        <div class="dialog-content">
-          <p class="dialog-close">x</p>
-          <slot>empty</slot>
-        </div>
-      </transition>
+		<div class="dialog-wrap" v-if="isShow">
+			<div class="dialog-cover" @click="closeMyself"></div>
+         <transition name="drop">
+           <div class="dialog-content">
+             <p class="dialog-close" @click="closeMyself">x</p>
+             <slot>empty</slot>
+           </div>
+         </transition>
 		</div>
 	</div>
 </template>
@@ -26,7 +26,7 @@
 			}
 		},
 		methods: {
-			close () {
+			closeMyself () {
 				this.$emit('on-close')
 			}
 		}

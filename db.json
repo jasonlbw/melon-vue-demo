@@ -44,8 +44,11 @@
     }
   ],
   "login": {
-    "username": "yudongdong",
+    "username": "melon",
     "userId": 123123
+  },
+  "register": {
+    "username": "melon"
   },
   "getPrice": {
     "amount": 678

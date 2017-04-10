@@ -4,12 +4,17 @@
          <div class="app-head-inner">
             <img src="../assets/logo.png" alt="">
             <div class="head-nav">
-               <ul class="nav-list">
-                  <li>登录</li>
+               <ul v-if="isLogin" class="nav-list">
+                  <li>{{ userName }}</li>
                   <li class="nav-pile">|</li>
-                  <li>注册</li>
+                  <li><a @click="exit">退出</a></li>
+               </ul>
+               <ul v-if="!isLogin" class="nav-list">                  
+                  <li><a @click="showLogDialog">登录</a></li>
                   <li class="nav-pile">|</li>
-                  <li>关于</li>
+                  <li><a @click="showRegDialog">注册</a></li>
+                  <li class="nav-pile">|</li>
+                  <li><a @click="showAboutDialog">关于</a></li>
                </ul>
             </div>
          </div>
@@ -23,22 +28,64 @@
       <div class="app-foot">
          <p>© 2016 fishenal MIT</p>
       </div>
-      <my-dialog>
-         
+      <my-dialog :is-show="isShowLogDialog" @on-close="closeDialog('isShowLogDialog')">
+         <log-form @log-success="hasLogin"></log-form>
+      </my-dialog>
+      <my-dialog :is-show="isShowRegDialog" @on-close="closeDialog('isShowRegDialog')">
+         <reg-form @reg-success="hasReg"></reg-form>
+      </my-dialog>
+      <my-dialog :is-show="isShowAboutDialog" @on-close="closeDialog('isShowAboutDialog')">
+         <p>本报告在调研数据的基础上，采用定性与定量相结合的方式深入分析了专车市场发展的驱动因素与阻碍因素、专车市场背后的产业格局、专车企业的竞争格局、用户对专车市场的依赖程度、专车对其他交通工具运力的补充效应等，通过这五个章节的研究反映专车市场的发展态势和面临的问题。报告力求客观、深入、准确地反映中国专车市场发展情况，为政府、企事业单位和社会各界提供决策依据。 </p>
       </my-dialog>
    </div>
 </template>
 
 <script>
 import dialog from './dialog'
+import logForm from './logForm'
+import regForm from './regForm'
+
 export default {   
    data () {
       return {
-         name: 'layout'
+         isShowLogDialog: false,
+         isShowRegDialog: false,
+         isShowAboutDialog: false,
+         userName: '',
+         isLogin: false
+      }
+   },
+   methods: {
+      showLogDialog () {
+         this.isShowLogDialog = true
+      },
+      showRegDialog () {
+         this.isShowRegDialog = true
+      },
+      showAboutDialog () {
+         this.isShowAboutDialog = true
+      },
+      closeDialog (attr) {
+         this[attr] = false
+      },
+      hasReg (data) {
+         console.log(data)
+         this.isShowRegDialog = false
+      },
+      hasLogin (data) {
+         this.userName = data.username
+         this.isLogin = true
+         this.isShowLogDialog = false
+      },
+      exit () {
+         this.userName = ''
+         this.isLogin = false
       }
    },
    components: {
-      myDialog: dialog
+      myDialog: dialog,
+      logForm,
+      regForm
    }
 }
 </script>
@@ -177,6 +224,8 @@ body {
   vertical-align: middle;
   padding: 0 10px;
   border: 1px solid #ccc;
+  outline: none;
+  font-family: 'Microsoft YaHei';
 }
 .g-form-btn {
   padding-left: 100px;
