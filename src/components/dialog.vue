@@ -51,6 +51,7 @@
   position: fixed;
   width: 100%;
   height: 100%;
+  z-index: 10;
 }
 .dialog-cover {
   background: #000;
