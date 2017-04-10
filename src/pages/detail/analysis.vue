@@ -26,9 +26,9 @@
                    有效时间：
                </div>
                <div class="sales-board-line-right">
-                  <!-- <v-chooser
+                  <v-chooser
                   :selections="periodList"
-                  @on-change="onParamChange('period', $event)"></v-chooser> -->
+                  @on-change="onParamChange('period', $event)"></v-chooser>
                </div>
           </div>
           <div class="sales-board-line">
@@ -86,13 +86,29 @@
 <script>
 	import vCounter from '../../components/base/counter'
 	import vSelection from '../../components/base/selection'
+   import vChooser from '../../components/base/chooser'
 	export default {
 		components: {
 			vCounter,
-			vSelection
+			vSelection,
+         vChooser
 		},
 		data () {
 			return {
+            periodList: [
+               {
+                  label: '半年',
+                  value: 0
+               },
+               {
+                  label: '一年',
+                  value: 1
+               },
+               {
+                  label: '三年',
+                  value: 2
+               }
+            ],
 				buyTypes: [
 		         {
 		         	label: '入门版',

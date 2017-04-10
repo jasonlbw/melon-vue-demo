@@ -2,7 +2,6 @@
 	<div class="detail-wrap">
     <div class="detail-left">
       <div class="product-board">
-         <!-- <img :src="productIcon"> -->
          <img :src="productIcon" />
          <ul>
          	<router-link :key="index" v-for="(item, index) in products" tag="li" :to="{ path: item.path }" active-class="active">
